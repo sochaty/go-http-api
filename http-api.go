@@ -8,14 +8,14 @@ import (
 )
 
 
-// Post //
+// Book Object //
 type Book struct {
 	Title string `json:"title"`
 	Body string `json:"body"`
 	Author User `json:"author"`
 }
 
-// User //
+// User Object //
 type User struct {
 	FullName string `json:"fullName"`
 	UserName string `json:"userName"`
@@ -61,7 +61,6 @@ func getAllBooks(w http.ResponseWriter, r *http.Request) {
 func addBook(w http.ResponseWriter, r *http.Request) {
 	var newBook Book
 	json.NewDecoder(r.Body).Decode(&newBook)
-	// routeVariable := mux.Vars(r)["item"]
 	books = append(books, newBook)
 	w.Header().Set("Content-Type", "application/json")
 	json.NewEncoder(w).Encode(books)
